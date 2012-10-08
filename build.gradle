@@ -1,5 +1,9 @@
-targetRepositories = ["http://cobra.cs.uni-duesseldorf.de/prob_dev_target/","http://download.eclipse.org/releases/indigo/","http://rodin-b-sharp.sourceforge.net/updates"]	
+targetRepositories = ["http://download.eclipse.org/releases/indigo/","http://rodin-b-sharp.sourceforge.net/updates", "http://rodin-b-sharp.sourceforge.net/core-updates"]	
 
 groupID = "de.prob2"
 
 apply from: 'tycho_build.gradle'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.2'
+}
