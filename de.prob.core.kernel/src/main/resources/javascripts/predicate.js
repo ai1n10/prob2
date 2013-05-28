@@ -146,7 +146,6 @@ function update(vis, tree, root, source, i, diagonal) {
                     }
                     return "t"+ root.fId + rootName.indexOf(d) ;
                 });
-        console.log(textW);
 
         rootNode.append("svg:text")
             .attr("class","value")

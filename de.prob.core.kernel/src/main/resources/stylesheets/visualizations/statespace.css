@@ -12,6 +12,7 @@ path.link {
 .state text {
   stroke: none;
   fill: white;
+  letter-spacing: 0;
 }
 
 .link {
@@ -23,6 +24,7 @@ path.link {
 	list-style-type: none;
 	background: rgb(255,255,255) transparent;
 	background: rgba(255,255,255,0.1);
+	border-style: none;
 	margin-bottom: 0;
 	margin-top: 0;
 	font-family: Arial, Verdana, sans-serif;

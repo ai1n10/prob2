@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Data Visualization in ProB</title>
+
+        <meta name="description" content="Creating dynamic visualizations based on data generated from ProB">
+        <meta name="author" content="Joy Clark">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h2>Data Visualization in ProB</h2>
+                    <!--<h4>Generating dynamic visualizations based on data</h4>-->
+                    <p>
+                        <small>by Joy Clark</small>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Motivation</h2>
+                    <ul>
+                        <li>Benefits of visualization</li>
+                        <li>Lack of data visualizations in ProB 2.0</li>
+                        <li>Move away from GraphViz as visualization engine</li>
+                    </ul>
+
+                    <aside class="notes">
+                        ProB is a tool that uses consistency checking and animation to verify formal models. We wanted to implement a way to dynamically generate visualizations based on the data that is produced during verification. This would make it easier for the user to analyze and understand the results that are created from ProB.
+
+                        ProB 2.0 is the Java API that is currently in development for the ProB tool. There are several visualizations currently available in the Tcl/Tk version of ProB that are were not yet available in the ProB 2.0 application. 
+
+                        The current visualizations that are available in the ProB Tcl/Tk version of ProB are all powered by GraphViz. Because GraphViz is rather inefficient for  
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Graph Engines</h2>
+                    <ul>
+                        <li>JGraphX</li>
+                        <li>JUNG</li>
+                        <li>Zest</li>
+                        <li>D3</li>
+                    </ul>
+
+                    <aside class="notes">
+
+                    </aside>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>State Space Visualization</h2>
+                        <iframe src="statespace_servlet/?init=c78fb957-dbe0-4896-a836-ede38216e8b8" scrolling="no" width="800" height="600"></iframe>
+                    </section>
+
+                    <section>
+                        <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
+                    </section>
+                </section>
+
+                <section>
+                        <h2>Formula Visualization</h2>
+                        <iframe src="predicate/?init=86374f16-451e-4456-af1a-8aa31c843a42" scrolling="no" width="800" height="600"></iframe>
+                </section>
+
+                <section>
+                    <h2>Value Over Time Visualization</h2>
+                    <iframe src="formula/?init=8702578b-85e0-4841-99e5-d68bf7df0053" scrolling="no" width="800" height="600"></iframe>
+                </section>
+
+
+
+                <section>
+                    <h1>Questions?</h1>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+
+    </body>
+</html>
