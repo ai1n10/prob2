@@ -20,6 +20,8 @@
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
 
+        <link rel="stylesheet" href="/css/wNotes.css">
+
         <!-- If the query includes 'print-pdf', use the PDF print sheet -->
         <script>
             document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -43,6 +45,12 @@
                     <p>
                         <small>by Joy Clark</small>
                     </p>
+
+                    <aside class="notes">
+                        <p>Hallo zusammen und willkommen zum Vortrag meiner Bachelorarbeit. Heute werde ich den Vortrag auf Englisch halten, aber nachher könnt ihr sowohl auf Deutsch als auf Englisch Fragen stellen.</p>
+
+                        <p>The topic for my bachelor thesis was "Data Visualization in ProB"</p>
+                    </aside>
                 </section>
 
                 <section>
@@ -54,11 +62,19 @@
                     </ul>
 
                     <aside class="notes">
-                        ProB is a tool that uses consistency checking and animation to verify formal models. We wanted to implement a way to dynamically generate visualizations based on the data that is produced during verification. This would make it easier for the user to analyze and understand the results that are created from ProB.
+                        <ul>
+                            <li>
+                                ProB is a tool that uses consistency checking and animation to verify formal models. We wanted to implement a way to dynamically generate visualizations based on the data that is produced during verification. This would make it easier for the user to analyze and understand the results that are created from ProB.
+                            </li>
 
-                        ProB 2.0 is the Java API that is currently in development for the ProB tool. There are several visualizations currently available in the Tcl/Tk version of ProB that are were not yet available in the ProB 2.0 application. 
-
-                        The current visualizations that are available in the ProB Tcl/Tk version of ProB are all powered by GraphViz. Because GraphViz is rather inefficient for  
+                            <li>
+                                ProB 2.0 is the Java API that is currently in development for the ProB tool. There are several visualizations currently available in the Tcl/Tk version of ProB that are were not yet available in the ProB 2.0 application. 
+                            </li>
+                            
+                            <li>
+                                The current visualizations that are available in the ProB Tcl/Tk version of ProB are all powered by GraphViz. Because GraphViz is rather inefficient for the drawing of very large graphs, and because the state space that needs to be visualized can become very fast very quickly, we wanted to try to find another graph engine that could handle the rendering of the visualizations. 
+                            </li>
+                        </ul>
                     </aside>
                 </section>
 
@@ -72,14 +88,24 @@
                     </ul>
 
                     <aside class="notes">
-
+                        <p>At the beginning of this work, we were still using JGraphT as the graph library to handle the interactions with </p>
                     </aside>
+                </section>
+
+                <section>
+                    <h4>Communication between the Visualization and Visualization Engine</h4>
+                    <img width="319" height="184" src="/images/joysPres/j1.png" alt="Communication">
+                </section>
+
+                <section>
+                    <h2>Program Flow</h2>
+                    <img width="512" height="103" src="/images/joysPres/j2.png" alt="Program Flow">
                 </section>
 
                 <section>
                     <section>
                         <h2>State Space Visualization</h2>
-                        <iframe src="statespace_servlet/?init=c78fb957-dbe0-4896-a836-ede38216e8b8&w=780&h=560" scrolling="no" width="800" height="600"></iframe>
+                        <iframe src="statespace_servlet/?init=c78fb957-dbe0-4896-a836-ede38216e8b8&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
                     </section>
 
                     <section>
@@ -90,7 +116,7 @@
                 <section>
                     <section>
                         <h2>Formula Visualization</h2>
-                        <iframe src="predicate/?init=86374f16-451e-4456-af1a-8aa31c843a42&w=780&h=560" scrolling="no" width="800" height="600"></iframe>
+                        <iframe src="predicate/?init=86374f16-451e-4456-af1a-8aa31c843a42&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
                     </section>
 
                     <section>
