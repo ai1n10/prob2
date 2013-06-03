@@ -141,7 +141,7 @@
               locationURI="menu:analyze">
            <command
                  commandId="de.prob.ui.viz.pred"
-                 label="Open Predicate Visualization"
+                 label="Open Visualization of Formula"
                  style="push">
               <parameter
                     name="de.prob.ui.viz.eval"
@@ -282,7 +282,7 @@
             <command
                   description="Takes formula from State View and opens a visualization"
                   id="de.prob.ui.createFormViz"
-                  name="Create Formula Visualization">
+                  name="Open Visualization of Formula">
             </command>
    </extension>
    

@@ -1,0 +1,8 @@
+.reveal aside.notes {
+	display: block;
+	padding: 20px;
+	margin: 20px;
+	border: 2px solid black;
+	font-size: 12px;
+	line-height: 20px;
+}

@@ -20,7 +20,8 @@
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
 
-        <link rel="stylesheet" href="/css/wNotes.css">
+        <link rel="stylesheet" href="css/print/wNotes.css">
+
 
         <!-- If the query includes 'print-pdf', use the PDF print sheet -->
         <script>
@@ -56,7 +57,12 @@
                 <section>
                     <h2>Motivation</h2>
                     <ul>
-                        <li>Benefits of visualization</li>
+                        <li>Benefits of visualization
+                            <ul>
+                                <li>State space based visualizations</li>
+                                <li>Current state based visualizations</li>
+                            </ul>
+                        </li>
                         <li>Lack of data visualizations in ProB 2.0</li>
                         <li>Move away from GraphViz as visualization engine</li>
                     </ul>
@@ -64,15 +70,21 @@
                     <aside class="notes">
                         <ul>
                             <li>
-                                ProB is a tool that uses consistency checking and animation to verify formal models. We wanted to implement a way to dynamically generate visualizations based on the data that is produced during verification. This would make it easier for the user to analyze and understand the results that are created from ProB.
+                                ProB is a tool used to verify formal models. The purpose of this work was to dynamically generate visualizations based on the data that is produced during verification. This should make it easier to analyze and understand the results that are produced by ProB. The visualizations that were created fall into two different categories:
+                                <ul>
+                                    <li>
+                                        The first category is that of visualizations based on the state space for a given model. The state space in ProB is the labeled transition system that is produced during consistency checking. It is represented as a directed graph where the vertices represent every state in the system and the edges represent every transition between the given states.
+                                    </li>
+                                    <li>
+                                        The second category is that of visualizations that are calculated for the current state in an animation. Animation is when the user interactively chooses transitions to create a path through the state space. The current state is the state that is the target state of the last transition that was selected.
+                                    </li>
+                                </ul> 
                             </li>
-
                             <li>
-                                ProB 2.0 is the Java API that is currently in development for the ProB tool. There are several visualizations currently available in the Tcl/Tk version of ProB that are were not yet available in the ProB 2.0 application. 
+                                ProB 2.0 is the Java API that is currently in development for the ProB tool. There are several visualizations currently available in the Tcl/Tk version of ProB that are were not yet available in the ProB 2.0 application. One of the major features that have been implemented in ProB 2.0 is the programmatic abstraction of the state space and the current animation. The visualizations that we created are based on these. There is also a built in listener framework that we use so that the visualizations are updated whenever a change takes place in the state space or the current animation.
                             </li>
-                            
                             <li>
-                                The current visualizations that are available in the ProB Tcl/Tk version of ProB are all powered by GraphViz. Because GraphViz is rather inefficient for the drawing of very large graphs, and because the state space that needs to be visualized can become very fast very quickly, we wanted to try to find another graph engine that could handle the rendering of the visualizations. 
+                                The current visualizations that are available in the ProB Tcl/Tk version of ProB are all powered by GraphViz. Because GraphViz is rather inefficient for the drawing of large graphs. The state space can get very large very quickly, so we wanted a graph library that can handle very large state spaces.
                             </li>
                         </ul>
                     </aside>
@@ -84,32 +96,93 @@
                         <li>JGraphX</li>
                         <li>JUNG</li>
                         <li>Zest</li>
-                        <li>D3</li>
+                        <li>D3 (Data-Driven Documents)</li>
+                        <li>Viz.js</li>
                     </ul>
 
                     <aside class="notes">
-                        <p>At the beginning of this work, we were still using JGraphT as the graph library to handle the interactions with </p>
+                        <p>At the beginning of the implementation, we carried out an experiment to choose the graph engine.</p>
+                        <ul>
+                            <li>
+                                At that time, we were using JGraphT as the graph library responsible for the graph algorithms in the state space. However, JGraphX, the visualization engine for JGraphT, proved to be incapable of producing and adequate visualization of directed graphs.
+                            </li>
+                            <li>
+                                We then switched graph libraries to JUNG. Both JUNG and Zest, the eclipse based visualization library, were able to produce visualizations of graphs that were quite nice. However, for both of them, it was difficult to create visualizations that could be updated dynamically.
+                            </li>
+                            <li>
+                                The library that we chose to use was D3, which stands for Data-Driven Documents. D3 is a JavaScript library which offers a different approach to graph visualization. Instead of producing a unique grammar and an engine for rendering visualization, D3 generates pure HTML and SVG elements. The rendering is then left up to the browser and can be styled with CSS. D3 also provides several layout algorithms. We used the force layout and the tree layout for the visualizations that we will see very soon.
+                            </li>
+                            <li>
+                                There are some smaller visualizations in ProB that are powered by GraphViz and that are small enough that they can be rendered efficiently. We didn't want to throw these out, so we decided to find a way to integrate them into the visualizations. We did this by using the Viz.js JavaScript library. The creator of Viz.js used emscripten to compile GraphViz to JavaScript and then provided a wrapper for the library so that visualizations written in the DOT graph description language can be integrated into an application.
+                            </li>
+                        <ul>
                     </aside>
                 </section>
 
                 <section>
                     <h4>Communication between the Visualization and Visualization Engine</h4>
-                    <img width="319" height="184" src="/images/joysPres/j1.png" alt="Communication">
+                    <img src="/images/pres/j1.png">
+
+                    <aside class="notes">
+                        <p>
+                            One of the main features that we implemented during the course of the work was the creation of a visualization framework. In ProB 2.0 we already had a functioning jetty server, so we wanted to integrate the visualizations into the application using this webserver. How it works is that when a visualization is created, a visualization engine is created for that visualization. When it is initialized, the visualization sets up a polling interval and polls the visualization engine regularly asking for either the complete data set or the changes since the last poll. Then the correct data set is sent to the visualization.
+                        </p>
+                    </aside>
                 </section>
 
                 <section>
                     <h2>Program Flow</h2>
-                    <img width="512" height="103" src="/images/joysPres/j2.png" alt="Program Flow">
+                    <img src="/images/pres/j2.png">
+
+                    <aside class="notes">
+                        <p>
+                            This diagram shows the program flow of the visualization framework. The visualization engine subscribes to either the state space or the animation registry and thereby receives notifications about either changes in the state space or in the current animation. The visualization engine then recalculates the data for the visualization to reflect the changes. When the visualization polls the visualization engine, it receives the new data that reflects the necessary changes.
+                        </p>
+                    </aside>
                 </section>
 
                 <section>
                     <section>
                         <h2>State Space Visualization</h2>
                         <iframe src="statespace_servlet/?init=c78fb957-dbe0-4896-a836-ede38216e8b8&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
+
+                        <aside class="notes">
+                            <p>So I took the liberty of embedding my visualizations into this presentation. Now I can give you all a little live demo</p>
+                            <ol>
+                                <li>Move nodes around</li>
+                                <li>Show zooming and panning</li>
+                                <li><p>One of the things that we wanted to accomplish was allowing the user to customize the appearance of the visualization. One of the benefits of D3 is that you can select any element in the visualization and change its attributes. To allow the user to customize the visualization, we have lifted this functionality into the java level. For instance, if I want to color the root node blue...</p></li>
+                                <li>Move to console</li>
+                                <li>...Show visualization. But we also want to color only the nodes that meet a certain attribute. For this, we define a predicate and specify a state space. The specified attributes will then be applied to all of the states in the state space for which the predicate is true.... Move to console</li>
+                                <li>...If new states are added to the state space and they meet the required predicate, the selection will be updated and they also will be colored.</li>
+                                <li>Show signature merge.</li>
+                                <li>Show signature merge dialog.</li>
+                                <li>Show transition diagram</li>
+                                <li>Switch expressions</li>
+                                <li>Show dotty signature merge and transition diagram</li>
+                            </ol>
+                        </aside>
                     </section>
 
                     <section>
                         <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
+                        <p><b>ProB 2.0></b></p>
+
+                        <aside class="notes">
+                            <p><pre><code>x = transform("#sroot") {
+                                set "fill", "blue"
+                            }
+                            viz2.apply(x)
+                            </code></pre></p>
+                            <p>Move back to visualization</p>
+
+                            <p><pre><code>x = transform("card(active)=0" as ClassicalB, s) {
+                                set "fill","red"
+                            }
+                            viz2.apply(x)
+                            </code></pre></p>
+
+                        </aside>
                     </section>
                 </section>
 
@@ -117,10 +190,23 @@
                     <section>
                         <h2>Formula Visualization</h2>
                         <iframe src="predicate/?init=86374f16-451e-4456-af1a-8aa31c843a42&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
+
+                        <aside class="notes">
+                            <p>This visualization shows the formula and how it breaks down into all of its subformulas. It also shows the value at a given state. If a predicate is true, it is colored green. If it is red, it is colored red. If it is an expression, it is colored gray or white. The visualization is interactive. You can expand or retract formulas (SHOW THIS). You can also zoom and pan through the visualization.</p>
+
+                            <p>Right now it is visualizing the invariant for the scheduler model. This is how it appears when the invariant is ok. MOVE TO CONSOLE</p>
+
+                            <p>This is how the visualization appears when the invariant is violated. It allows you to see the exact part of the formula that has the problem.</p>
+                        </aside>
                     </section>
 
                     <section>
                         <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
+                        <p><b>ProB 2.0</b></p>
+
+                        <aside class="notes">
+                            <p><code>animations.addNewHistory(h2)</code></p>
+                        </aside>
                     </section>
                 </section>
 
@@ -128,17 +214,48 @@
                     <section>
                         <h2>Value Over Time Visualization</h2>
                         <iframe src="formula/?init=8702578b-85e0-4841-99e5-d68bf7df0053&w=780&h=560" scrolling="no" width="800" height="600"></iframe>
+
+                        <aside class="notes">
+                            <p>This visualization shows the value of a formula over the course of an animation. This is especially useful in analyzing models that have a temporal element. You can add a new formula HERE. You can toggle the appearance of the visualization HERE. If you want to see the lines laid out over each other, you can view it in this mode. If you want to view them separately, you just click HERE. The visualization supports evaluation of expressions that take on an integer or boolean value and predicates.  This visualization will be updated whenever any changes in an animation take place. ...MOVE TO CONSOLE... Now you can see that the scale has been increased by several steps. When this visualization is created, it is also possible to specify an expression that will be evaluated, and against which the other elements are plotted.</p>
+                        </aside>
                     </section>
 
                     <section>
                         <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
+                        <p><b>ProB 2.0</b></p>
+
+                        <aside class="notes">
+                            <p>Perform several animation steps</p>
+                            <p>Move back</p>
+                        </aside>
                     </section>
+                </section>
+
+                <section>
+                    <h2>Future Work</h2>
+                    <ul>
+                        <li>New visualizations</li>
+                        <li>Language support</li>
+                        <li>Integration of visualizations into other applications</li>
+                    </ul>
+
+                    <aside class="notes">
+                        <ul>
+                            <li>Thanks to the visualization framework that we created in this work, it should be relatively easy to create new visualizations. In the future, we will most likely be creating visualizations for a state in the state space and for the refinement hierarchy that is present in formal models.</li>
+                            <li>Some work can also be done to make the visualizations created during the course of this work compatible with all of the different specification languages that ProB supports. The formula visualization currently supports only B-type languages (Classical B and Event-B). The state space visualization should work also for CSP models, although the derived graphs may not work correctly, and the visualization of the value of a formula over time has not yet been tested for different languages</li>
+                            <li>In ProB 2.0, we are also currently working on a worksheet element that the user can create to provide documentation and execute scripts. It would be very useful to integrate the visualizations created in the course of this work into the worksheet. As we have seen from this presentation, it is already possible to embed the visualizations into other javascript applications, but we did this by embedding each visualization within an iframe. In the future, it would be nice to actually embed the visualization itself into an application.</li>
+                        </ul>
+                    </aside>
                 </section>
 
 
 
                 <section>
                     <h1>Questions?</h1>
+
+                    <aside class="notes">
+                        Thank you all for listening! Are there any questions?
+                    </aside>
                 </section>
 
             </div>
