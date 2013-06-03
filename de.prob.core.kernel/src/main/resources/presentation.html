@@ -20,7 +20,7 @@
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
 
-        <link rel="stylesheet" href="css/print/wNotes.css">
+        <!--<link rel="stylesheet" href="css/print/wNotes.css">-->
 
 
         <!-- If the query includes 'print-pdf', use the PDF print sheet -->
@@ -120,17 +120,6 @@
                 </section>
 
                 <section>
-                    <h4>Communication between the Visualization and Visualization Engine</h4>
-                    <img src="/images/pres/j1.png">
-
-                    <aside class="notes">
-                        <p>
-                            One of the main features that we implemented during the course of the work was the creation of a visualization framework. In ProB 2.0 we already had a functioning jetty server, so we wanted to integrate the visualizations into the application using this webserver. How it works is that when a visualization is created, a visualization engine is created for that visualization. When it is initialized, the visualization sets up a polling interval and polls the visualization engine regularly asking for either the complete data set or the changes since the last poll. Then the correct data set is sent to the visualization.
-                        </p>
-                    </aside>
-                </section>
-
-                <section>
                     <h2>Program Flow</h2>
                     <img src="/images/pres/j2.png">
 
@@ -142,93 +131,61 @@
                 </section>
 
                 <section>
-                    <section>
-                        <h2>State Space Visualization</h2>
-                        <iframe src="statespace_servlet/?init=c78fb957-dbe0-4896-a836-ede38216e8b8&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
+                    <h4>Communication between the Visualization and Visualization Engine</h4>
+                    <img src="/images/pres/j1.png">
 
-                        <aside class="notes">
-                            <p>So I took the liberty of embedding my visualizations into this presentation. Now I can give you all a little live demo</p>
-                            <ol>
-                                <li>Move nodes around</li>
-                                <li>Show zooming and panning</li>
-                                <li><p>One of the things that we wanted to accomplish was allowing the user to customize the appearance of the visualization. One of the benefits of D3 is that you can select any element in the visualization and change its attributes. To allow the user to customize the visualization, we have lifted this functionality into the java level. For instance, if I want to color the root node blue...</p></li>
-                                <li>Move to console</li>
-                                <li>...Show visualization. But we also want to color only the nodes that meet a certain attribute. For this, we define a predicate and specify a state space. The specified attributes will then be applied to all of the states in the state space for which the predicate is true.... Move to console</li>
-                                <li>...If new states are added to the state space and they meet the required predicate, the selection will be updated and they also will be colored.</li>
-                                <li>Show signature merge.</li>
-                                <li>Show signature merge dialog.</li>
-                                <li>Show transition diagram</li>
-                                <li>Switch expressions</li>
-                                <li>Show dotty signature merge and transition diagram</li>
-                            </ol>
-                        </aside>
-                    </section>
-
-                    <section>
-                        <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
-                        <p><b>ProB 2.0></b></p>
-
-                        <aside class="notes">
-                            <p><pre><code>x = transform("#sroot") {
-                                set "fill", "blue"
-                            }
-                            viz2.apply(x)
-                            </code></pre></p>
-                            <p>Move back to visualization</p>
-
-                            <p><pre><code>x = transform("card(active)=0" as ClassicalB, s) {
-                                set "fill","red"
-                            }
-                            viz2.apply(x)
-                            </code></pre></p>
-
-                        </aside>
-                    </section>
+                    <aside class="notes">
+                        <p>
+                            One of the main features that we implemented during the course of the work was the creation of a visualization framework. In ProB 2.0 we already had a functioning jetty server, so we wanted to integrate the visualizations into the application using this webserver. How it works is that when a visualization is created, a visualization engine is created for that visualization. When it is initialized, the visualization sets up a polling interval and polls the visualization engine regularly asking for either the complete data set or the changes since the last poll. Then the correct data set is sent to the visualization.
+                        </p>
+                    </aside>
                 </section>
 
                 <section>
-                    <section>
-                        <h2>Formula Visualization</h2>
-                        <iframe src="predicate/?init=86374f16-451e-4456-af1a-8aa31c843a42&w=780&h=560" scrolling="no" width="800" height="600"></iframe> 
+                    <h2>State Space Visualization</h2>
+                    <iframe src="statespace_servlet/?init=b3ee90a7-de7e-423f-8cc9-a4fa84d8e4d1&w=780&h=500" scrolling="no" width="800" height="500"></iframe> 
+                    <iframe class="fragment" src="console.html" scrolling="no" width="800" height="100"></iframe>
 
-                        <aside class="notes">
-                            <p>This visualization shows the formula and how it breaks down into all of its subformulas. It also shows the value at a given state. If a predicate is true, it is colored green. If it is red, it is colored red. If it is an expression, it is colored gray or white. The visualization is interactive. You can expand or retract formulas (SHOW THIS). You can also zoom and pan through the visualization.</p>
-
-                            <p>Right now it is visualizing the invariant for the scheduler model. This is how it appears when the invariant is ok. MOVE TO CONSOLE</p>
-
-                            <p>This is how the visualization appears when the invariant is violated. It allows you to see the exact part of the formula that has the problem.</p>
-                        </aside>
-                    </section>
-
-                    <section>
-                        <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
-                        <p><b>ProB 2.0</b></p>
-
-                        <aside class="notes">
-                            <p><code>animations.addNewHistory(h2)</code></p>
-                        </aside>
-                    </section>
+                    <aside class="notes">
+                        <p>So I took the liberty of embedding my visualizations into this presentation. Now I can give you all a little live demo</p>
+                        <ol>
+                            <li>Move nodes around</li>
+                            <li>Show zooming and panning</li>
+                            <li><p>One of the things that we wanted to accomplish was allowing the user to customize the appearance of the visualization. One of the benefits of D3 is that you can select any element in the visualization and change its attributes. To allow the user to customize the visualization, we have lifted this functionality into the java level. For instance, if I want to color the root node blue...</p></li>
+                            <li>Move to console</li>
+                            <li>...Show visualization. But we also want to color only the nodes that meet a certain attribute. For this, we define a predicate and specify a state space. The specified attributes will then be applied to all of the states in the state space for which the predicate is true.... Move to console</li>
+                            <li>...If new states are added to the state space and they meet the required predicate, the selection will be updated and they also will be colored.</li>
+                            <li>Show signature merge.</li>
+                            <li>Show signature merge dialog.</li>
+                            <li>Show transition diagram</li>
+                            <li>Switch expressions</li>
+                            <li>Show dotty signature merge and transition diagram</li>
+                        </ol>
+                    </aside>
                 </section>
 
                 <section>
-                    <section>
-                        <h2>Value Over Time Visualization</h2>
-                        <iframe src="formula/?init=8702578b-85e0-4841-99e5-d68bf7df0053&w=780&h=560" scrolling="no" width="800" height="600"></iframe>
+                    <h2>Formula Visualization</h2>
+                    <iframe src="predicate/?init=ab30699d-6a15-4493-a94a-fe2b47b857f7&w=780&h=560" scrolling="no" width="800" height="500"></iframe> 
+                    <iframe class="fragment" src="console.html" scrolling="no" width="800" height="100"></iframe>
 
-                        <aside class="notes">
-                            <p>This visualization shows the value of a formula over the course of an animation. This is especially useful in analyzing models that have a temporal element. You can add a new formula HERE. You can toggle the appearance of the visualization HERE. If you want to see the lines laid out over each other, you can view it in this mode. If you want to view them separately, you just click HERE. The visualization supports evaluation of expressions that take on an integer or boolean value and predicates.  This visualization will be updated whenever any changes in an animation take place. ...MOVE TO CONSOLE... Now you can see that the scale has been increased by several steps. When this visualization is created, it is also possible to specify an expression that will be evaluated, and against which the other elements are plotted.</p>
-                        </aside>
-                    </section>
+                    <aside class="notes">
+                        <p>This visualization shows the formula and how it breaks down into all of its subformulas. It also shows the value at a given state. If a predicate is true, it is colored green. If it is red, it is colored red. If it is an expression, it is colored gray or white. The visualization is interactive. You can expand or retract formulas (SHOW THIS). You can also zoom and pan through the visualization.</p>
 
-                    <section>
-                        <iframe src="console.html" scrolling="no" width="800" height="600"></iframe>
-                        <p><b>ProB 2.0</b></p>
+                        <p>Right now it is visualizing the invariant for the scheduler model. This is how it appears when the invariant is ok. MOVE TO CONSOLE</p>
 
-                        <aside class="notes">
-                            <p>Perform several animation steps</p>
-                            <p>Move back</p>
-                        </aside>
-                    </section>
+                        <p>This is how the visualization appears when the invariant is violated. It allows you to see the exact part of the formula that has the problem.</p>
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Value Over Time Visualization</h2>
+                    <iframe src="formula/?init=063613c7-1bf5-4c00-8de2-d86f2fa155b9&w=780&h=560" scrolling="no" width="800" height="600"></iframe>
+                    <iframe class="fragment" src="console.html" scrolling="no" width="800" height="100"></iframe>
+
+                    <aside class="notes">
+                        <p>This visualization shows the value of a formula over the course of an animation. This is especially useful in analyzing models that have a temporal element. You can add a new formula HERE. You can toggle the appearance of the visualization HERE. If you want to see the lines laid out over each other, you can view it in this mode. If you want to view them separately, you just click HERE. The visualization supports evaluation of expressions that take on an integer or boolean value and predicates.  This visualization will be updated whenever any changes in an animation take place. ...MOVE TO CONSOLE... Now you can see that the scale has been increased by several steps. When this visualization is created, it is also possible to specify an expression that will be evaluated, and against which the other elements are plotted.</p>
+                    </aside>
                 </section>
 
                 <section>

@@ -1,13 +1,13 @@
-#Wed May 29 14:13:37 CEST 2013
+#Mon Jun 03 09:50:12 CEST 2013
 01ca311b-ab5d-42b8-9760-9b263ce93ce5={"mode"\:2,"disabled"\:[],"expr"\:"ready","transformers"\:[]}
 f986e391-37f1-4a6f-862b-21b92e143059={"mode"\:2,"disabled"\:[],"expr"\:"active","transformers"\:[]}
 dfac5cb9-180f-44a6-8975-b99aa5217e18={"formula"\:["\#ClassicalB\:card(active)\\u003d0","\#ClassicalB\:card(waiting)\\u003d0","\#ClassicalB\:card(ready)\\u003d0"]}
 2ee481e8-bddc-414c-944c-d1507cdc03b9={"mode"\:1,"disabled"\:[],"expr"\:"","transformers"\:["{\\"predicate\\"\:\\"\#ClassicalB\:1\\\\u003d1\\",\\"attrs\\"\:[],\\"styles\\"\:[{\\"name\\"\:\\"fill\\",\\"value\\"\:\\"blue\\"}]}"]}
 bf551419-2775-46a7-92d1-ce9392927735={"formula"\:["\#ClassicalB\:card(ready)\\u003d0","\#ClassicalB\:card(active)\\u003d0","\#ClassicalB\:card(waiting)\\u003d0"]}
 86374f16-451e-4456-af1a-8aa31c843a42=\#ClassicalB\:active <\: PID & ready <\: PID & waiting <\: PID & (ready /\\ waiting) \= {} & active /\\ (ready \\/ waiting) \= {} & card(active) <\= 1 & ((active \= {})  \=> (ready \= {}))
-c78fb957-dbe0-4896-a836-ede38216e8b8={"mode"\:1,"disabled"\:[],"expr"\:"waiting","transformers"\:["{\\"predicate\\"\:\\"\#ClassicalB\:card(waiting)\\\\u003d0\\",\\"attrs\\"\:[],\\"styles\\"\:[{\\"name\\"\:\\"fill\\",\\"value\\"\:\\"blue\\"}]}","{\\"predicate\\"\:\\"\#ClassicalB\:card(active)\\\\u003d0\\",\\"attrs\\"\:[],\\"styles\\"\:[{\\"name\\"\:\\"fill\\",\\"value\\"\:\\"green\\"}]}"]}
+c78fb957-dbe0-4896-a836-ede38216e8b8={"mode"\:1,"disabled"\:[],"expr"\:"active","transformers"\:[]}
 f96bb11c-4b72-4a96-ac7c-2946bde86ece={"formula"\:["\#ClassicalB\:card(waiting)","\#ClassicalB\:card(ready)","\#ClassicalB\:card(active)"]}
-fdbe4bb5-4f00-48fe-aff3-ca39cfa5c486={"mode"\:1,"disabled"\:[],"expr"\:"","transformers"\:[]}
 d2da8a90-ecd4-40d2-9488-ad2d94ab67dc={"formula"\:["\#ClassicalB\:card(active)"]}
+fdbe4bb5-4f00-48fe-aff3-ca39cfa5c486={"mode"\:1,"disabled"\:[],"expr"\:"","transformers"\:[]}
 620a8cf0-ac41-4aa7-bc78-025d35bc8ae7={"mode"\:"over","formula"\:["\#ClassicalB\:card(waiting)","\#ClassicalB\:waiting\\u003d{}"]}
 8702578b-85e0-4841-99e5-d68bf7df0053={"mode"\:"each","formula"\:["\#ClassicalB\:card(active)","\#ClassicalB\:card(waiting)","\#ClassicalB\:card(ready)"]}
