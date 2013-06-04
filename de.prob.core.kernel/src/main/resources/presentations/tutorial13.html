@@ -42,11 +42,90 @@
 				</section>
 
 				<section>
-					<h2>State Space API</h2>
-					<code>statespace.explore(StateId)</code>
-					<code>statespace.eval(StateId,List<IEvalElement>)</code>
+					<h2>Main Programmatic Abstractions</h2>
+					<ul>
+						<li>State Space</li>
+						<li>Model</li>
+						<li>Trace</li>
+					</ul>
 				</section>
 
+				<section>
+					<h2>State Space</h2>
+					<ul>
+						<li>Provide graph functions for interacting with the state space</li>
+						<li>Handles the evaluation of formulas</li>
+						<li>Acts as an Animator to communicate with ProB through commands</li>
+						<li>Caches the values of properties for given states</li>
+						<li>Notify changes in the state space</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Trace</h2>
+					<ul>
+						<li>Represents a path through the state space</li>
+						<li>Linked list with pointer to current state</li>
+						<li>Can move forward and backward through the Trace</li>
+						<li>Can add new transitions to the Trace</li>
+						<li>Can evaluate a formula for the current state or for every state in the trace</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Model</h2>
+					<ul>
+						<li>Provides user with a graph representation of the machine hierarchy</li>
+						<li>Nodes in the graph are programmatic abstractions of the elements of the Model (i.e. Machines and Contexts)</li>
+						<li>Machines and Contexts contain abstraction of children elements (i.e. variables, invariants, ...)</li>
+						<li>Contains link to original model file</li>
+						<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>, <code>CSPModel</code></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Relationship between programmatic abstractions</h2>
+					<p>Diagram?</p>
+				</section>
+
+				<section>
+					<h2>IEvalElement</h2>
+					<ul>
+						<li>Maps a String to a formalism to specify the correct parser</li>
+						<li>Is serializable</li>
+						<li>Convert in Groovy Console (DEMO?)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Animation Selector</h2>
+					<ul>
+						<li>Maintains a list of Traces and a list of State Spaces</li>
+						<li>Maintains the current animation (a Trace) for ProB 2.0</li>
+						<li>Possible to change the current animation</li>
+						<li>Possible to remove an animation</li>
+						<li>Notifies interested listeners of changes in the animation</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Listener framework</h2>
+					<p>Listeners can register themselves in the Animation Selector to receive notifications if the model that is being animated changes (and the state space for that model) or if a change in the current animation takes place (and the Trace that represents the new current animation)</p>
+					<br><br>
+					<p>Reference: <code>IAnimationChangeListener</code>, <code>IModelChangedListener</code></p>
+				</section>
+
+				<section>
+					<h2>Listener framework (cont.)</h2>
+					<p>Listeners can register themselves in the state space to receive notifications if any new states within the state space are found (and the list of new operations that are received)</p>
+					<br><br>
+					<p>Reference: <code>IStatesCalculatedListener</code></p>
+				</section>
+
+				<section>
+					<h2>Api</h2>
+					<p>Provides the Groovy interface through which the user can load models and update the ProB binaries.</p>
+				</section>
 			</div>
 
 		</div>
