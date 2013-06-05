@@ -78,7 +78,6 @@ public class PredicateServlet extends SessionBasedServlet {
 					return null;
 				}
 			}
-
 		}
 		return null;
 	}
