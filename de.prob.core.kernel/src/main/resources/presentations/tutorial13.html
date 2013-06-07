@@ -1,165 +1,275 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+<title>ProB 2.0 - Rodin User and Developer Workshop 2013</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+<meta name="description"
+	content="A framework for easily creating beautiful presentations using HTML">
+<meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style"
+	content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="css/reveal.min.css">
+<link rel="stylesheet" href="css/theme/beige.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+<link rel="icon" type="image/png" href="../images/favicon.ico">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
+<link rel="stylesheet" href="tutorial13.css">
 
-		<!--[if lt IE 9]>
+<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+    document.write('<link rel="stylesheet" href="css/print/'
+            + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')
+            + '.css" type="text/css" media="print">');
+</script>
+
+<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
-	</head>
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+	<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
 
-				<section>
-					<h1>ProB 2.0 API</h1>
-				</section>
+			<section>
+				<h1>ProB 2.0 for Developers</h1>
+			</section>
+			<section>
+				<h2>Available ProB Versions</h2>
+				<p>
+				<ul>
+					<li>ProB Tcl/Tk (a.k.a. ProB classic)</li>
+					<li>ProB for Rodin</li>
+					<li>probcli</li>
+					<li>ProB 2.0</li>
+				</ul>
+				</p>
+				<p>
+					We have nightly builds for all versions. <br /> (<a
+						href="http://nightly.cobra.cs.uni-duesseldorf.de/">http://nightly.cobra.cs.uni-duesseldorf.de/</a>)
+				</p>
+			</section>
 
-				<section>
-					<h2>Main Programmatic Abstractions</h2>
+
+
+			<section>
+				<h2>Vision</h2>
+				<div id="now" class="boxes now">
 					<ul>
-						<li>State Space</li>
-						<li>Model</li>
-						<li>Trace</li>
+						<li>ProB classic</li>
+						<li>ProB for Rodin</li>
+						<li>probcli</li>
+						<li>ProB 2.0</li>
 					</ul>
-				</section>
-
-				<section>
-					<h2>State Space</h2>
+				</div>
+				<div id="soon" class="boxes soon">
 					<ul>
-						<li>Provide graph functions for interacting with the state space</li>
-						<li>Handles the evaluation of formulas</li>
-						<li>Acts as an Animator to communicate with ProB through commands</li>
-						<li>Caches the values of properties for given states</li>
-						<li>Notify changes in the state space</li>
+						<li>ProB classic</li>
+						<li style="text-decoration: line-through;">ProB for Rodin</li>
+						<li>probcli</li>
+						<li>ProB 2.0</li>
 					</ul>
-				</section>
 
-				<section>
-					<h2>Trace</h2>
+				</div>
+				<div id="then" class="boxes then">
 					<ul>
-						<li>Represents a path through the state space</li>
-						<li>Linked list with pointer to current state</li>
-						<li>Can move forward and backward through the Trace</li>
-						<li>Can add new transitions to the Trace</li>
-						<li>Can evaluate a formula for the current state or for every state in the trace</li>
-					</ul>
-				</section>
+						<li style="text-decoration: line-through;">ProB classic</li>
+						<li style="text-decoration: line-through;">ProB for Rodin</li>
+						<li>probcli</li>
+						<li>ProB 2.0</li>
+				</ul>
 
-				<section>
-					<h2>Model</h2>
-					<ul>
-						<li>Provides user with a graph representation of the machine hierarchy</li>
-						<li>Nodes in the graph are programmatic abstractions of the elements of the Model (i.e. Machines and Contexts)</li>
-						<li>Machines and Contexts contain abstraction of children elements (i.e. variables, invariants, ...)</li>
-						<li>Contains link to original model file</li>
-						<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>, <code>CSPModel</code></li>
-					</ul>
-				</section>
+				</div>
+				<div class="rectangle"></div>
+				<div
+					style="width: 0; height: 0; border-left: 60px solid black; border-top: 20px solid transparent; border-bottom: 20px solid transparent; position: fixed; top: 325px; left: 770px;"></div>
+			<div class="now time">Now</div>
+			<div class="soon time">Soon</div>
+			<div class="then time">Then</div>
+			
+			</section>
 
-				<section>
-					<h2>Relationship between programmatic abstractions</h2>
-					<p>Diagram?</p>
-				</section>
 
-				<section>
-					<h2>IEvalElement</h2>
-					<ul>
-						<li>Maps a String to a formalism to specify the correct parser</li>
-						<li>Is serializable</li>
-						<li>Convert in Groovy Console (DEMO?)</li>
-					</ul>
-				</section>
+			<section>
+				<h2>Main Programmatic Abstractions</h2>
+				<ul>
+					<li>State Space</li>
+					<li>Model</li>
+					<li>Trace</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Animation Selector</h2>
-					<ul>
-						<li>Maintains a list of Traces and a list of State Spaces</li>
-						<li>Maintains the current animation (a Trace) for ProB 2.0</li>
-						<li>Possible to change the current animation</li>
-						<li>Possible to remove an animation</li>
-						<li>Notifies interested listeners of changes in the animation</li>
-					</ul>
-				</section>
+			<section>
+				<h2>State Space</h2>
+				<ul>
+					<li>Provide graph functions for interacting with the state
+						space</li>
+					<li>Handles the evaluation of formulas</li>
+					<li>Acts as an Animator to communicate with ProB through
+						commands</li>
+					<li>Caches the values of properties for given states</li>
+					<li>Notify changes in the state space</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Listener framework</h2>
-					<p>Listeners can register themselves in the Animation Selector to receive notifications if the model that is being animated changes (and the state space for that model) or if a change in the current animation takes place (and the Trace that represents the new current animation)</p>
-					<br><br>
-					<p>Reference: <code>IAnimationChangeListener</code>, <code>IModelChangedListener</code></p>
-				</section>
+			<section>
+				<h2>Trace</h2>
+				<ul>
+					<li>Represents a path through the state space</li>
+					<li>Linked list with pointer to current state</li>
+					<li>Can move forward and backward through the Trace</li>
+					<li>Can add new transitions to the Trace</li>
+					<li>Can evaluate a formula for the current state or for every
+						state in the trace</li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Listener framework (cont.)</h2>
-					<p>Listeners can register themselves in the state space to receive notifications if any new states within the state space are found (and the list of new operations that are received)</p>
-					<br><br>
-					<p>Reference: <code>IStatesCalculatedListener</code></p>
-				</section>
+			<section>
+				<h2>Model</h2>
+				<ul>
+					<li>Provides user with a graph representation of the machine
+						hierarchy</li>
+					<li>Nodes in the graph are programmatic abstractions of the
+						elements of the Model (i.e. Machines and Contexts)</li>
+					<li>Machines and Contexts contain abstraction of children
+						elements (i.e. variables, invariants, ...)</li>
+					<li>Contains link to original model file</li>
+					<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>,
+						<code>CSPModel</code></li>
+				</ul>
+			</section>
 
-				<section>
-					<h2>Api</h2>
-					<p>Provides the Groovy interface through which the user can load models and update the ProB binaries.</p>
-				</section>
-			</div>
+			<section>
+				<h2>Relationship between programmatic abstractions</h2>
+				<p>Diagram?</p>
+			</section>
 
+			<section>
+				<h2>IEvalElement</h2>
+				<ul>
+					<li>Maps a String to a formalism to specify the correct parser</li>
+					<li>Is serializable</li>
+					<li>Convert in Groovy Console (DEMO?)</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Animation Selector</h2>
+				<ul>
+					<li>Maintains a list of Traces and a list of State Spaces</li>
+					<li>Maintains the current animation (a Trace) for ProB 2.0</li>
+					<li>Possible to change the current animation</li>
+					<li>Possible to remove an animation</li>
+					<li>Notifies interested listeners of changes in the animation</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Listener framework</h2>
+				<p>Listeners can register themselves in the Animation Selector
+					to receive notifications if the model that is being animated
+					changes (and the state space for that model) or if a change in the
+					current animation takes place (and the Trace that represents the
+					new current animation)</p>
+				<br> <br>
+				<p>
+					Reference:
+					<code>IAnimationChangeListener</code>
+					,
+					<code>IModelChangedListener</code>
+				</p>
+			</section>
+
+			<section>
+				<h2>Listener framework (cont.)</h2>
+				<p>Listeners can register themselves in the state space to
+					receive notifications if any new states within the state space are
+					found (and the list of new operations that are received)</p>
+				<br> <br>
+				<p>
+					Reference:
+					<code>IStatesCalculatedListener</code>
+				</p>
+			</section>
+
+			<section>
+				<h2>Api</h2>
+				<p>Provides the Groovy interface through which the user can load
+					models and update the ProB binaries.</p>
+			</section>
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+	</div>
 
-		<script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+	<script>
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls : true,
+            progress : true,
+            history : true,
+            center : true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+            theme : Reveal.getQueryHash().theme, // available themes are in /css/theme
+            transition : Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+            // Optional libraries used to extend on reveal.js
+            dependencies : [ {
+                src : 'lib/js/classList.js',
+                condition : function() {
+                    return !document.body.classList;
+                }
+            }, {
+                src : 'plugin/markdown/marked.js',
+                condition : function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src : 'plugin/markdown/markdown.js',
+                condition : function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src : 'plugin/highlight/highlight.js',
+                async : true,
+                callback : function() {
+                    hljs.initHighlightingOnLoad();
+                }
+            }, {
+                src : 'plugin/zoom-js/zoom.js',
+                async : true,
+                condition : function() {
+                    return !!document.body.classList;
+                }
+            }, {
+                src : 'plugin/notes/notes.js',
+                async : true,
+                condition : function() {
+                    return !!document.body.classList;
+                }
+            }
+            // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+            ]
+        });
+    </script>
 
-		</script>
-
-	</body>
+</body>
 </html>

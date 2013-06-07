@@ -1,0 +1,30 @@
+.boxes {
+       top:120px;
+}
+.now, .soon, .then  { 
+       font-size: 0.8em;
+       position:fixed;
+} 
+
+.now  { 
+    left:0px;
+} 
+.soon  { 
+    left:300px;
+} 
+.then  { 
+    left:600px;
+} 
+
+.time {
+       top:360px;
+}
+
+.rectangle{
+       position:fixed;
+       top:340px;
+     width:800px;
+     height:10px;
+     border:1px solid #000;
+     background:black;
+}
