@@ -6,12 +6,16 @@ package de.prob.ui.constraint;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.prob.animator.IAnimator;
 import de.prob.animator.command.AbstractCommand;
 import de.prob.animator.command.ConstraintBasedDeadlockCheckCommand;
 import de.prob.check.ConstraintBasedCheckingResult;
 import de.prob.statespace.AnimationSelector;
+import de.prob.statespace.OpInfo;
+import de.prob.statespace.StateId;
 import de.prob.statespace.StateSpace;
 import de.prob.statespace.Trace;
 import de.prob.ui.ProBJobFinishedListener;
@@ -29,7 +33,11 @@ public class DeadlockCheckFinishedListener extends ProBJobFinishedListener {
 	private AnimationSelector selector;
 	private StateSpace statespace;
 
-	public DeadlockCheckFinishedListener(final Shell shell, AnimationSelector selector, StateSpace s) {
+	private final Logger logger = LoggerFactory
+			.getLogger(DeadlockCheckFinishedListener.class);
+
+	public DeadlockCheckFinishedListener(final Shell shell,
+			AnimationSelector selector, StateSpace s) {
 		this.shell = shell;
 		this.selector = selector;
 		this.statespace = s;
@@ -64,8 +72,14 @@ public class DeadlockCheckFinishedListener extends ProBJobFinishedListener {
 				dialogTitle = "DEADLOCK FOUND!";
 				message = "The model contains a deadlocking state satisfying the invariant, it will be shown in the state view.";
 
-				Trace traceToDeadlock = statespace.getTrace(command.getDeadlockStateId());
-				selector.replaceTrace(selector.getCurrentTrace(), traceToDeadlock);
+				String deadlockStateId = command.getDeadlockStateId();
+				StateId deadId = new StateId(deadlockStateId, statespace);
+				if (!statespace.containsVertex(deadId)) {
+					statespace.explore("root");
+				}
+				Trace traceToDeadlock = statespace.getTrace(deadlockStateId);
+				selector.replaceTrace(selector.getCurrentTrace(),
+						traceToDeadlock);
 				break;
 			case interrupted:
 				dialogType = MessageDialog.WARNING;
@@ -78,8 +92,8 @@ public class DeadlockCheckFinishedListener extends ProBJobFinishedListener {
 			}
 		}
 		if (shell.isDisposed()) {
-			System.out.println("Deadlock freedom check finished: "
-					+ dialogTitle);
+			logger.warn("Shell was disposed when trying to show dialog.");
+			logger.info("Deadlock freedom check finished: {}", dialogTitle);
 		} else {
 			final Runnable runnable = new Runnable() {
 				@Override
