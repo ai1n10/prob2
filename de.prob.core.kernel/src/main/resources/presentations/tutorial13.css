@@ -28,3 +28,7 @@
      border:1px solid #000;
      background:black;
 }
+
+.reveal iframe {
+   margin-top: 40px;
+}

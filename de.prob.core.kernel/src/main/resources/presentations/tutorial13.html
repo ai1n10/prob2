@@ -1,224 +1,409 @@
 <!doctype html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
-
 <title>ProB 2.0 - Rodin User and Developer Workshop 2013</title>
-
-<meta name="description"
-	content="A framework for easily creating beautiful presentations using HTML">
+<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 <meta name="author" content="Hakim El Hattab">
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style"
-	content="black-translucent" />
-
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link rel="stylesheet" href="css/reveal.min.css">
 <link rel="stylesheet" href="css/theme/beige.css" id="theme">
-
 <link rel="icon" type="image/png" href="../images/favicon.ico">
-
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="lib/css/zenburn.css">
 <link rel="stylesheet" href="tutorial13.css">
-
 <!-- If the query includes 'print-pdf', use the PDF print sheet -->
 <script>
     document.write('<link rel="stylesheet" href="css/print/'
             + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')
             + '.css" type="text/css" media="print">');
 </script>
-
 <!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 </head>
-
 <body>
-
-	<div class="reveal">
-
-		<!-- Any section element inside of this container is displayed as a slide -->
-		<div class="slides">
-
-			<section>
-				<h1>ProB 2.0 for Developers</h1>
-			</section>
-			<section>
-				<h2>Available ProB Versions</h2>
-				<p>
-				<ul>
-					<li>ProB Tcl/Tk (a.k.a. ProB classic)</li>
-					<li>ProB for Rodin</li>
-					<li>probcli</li>
-					<li>ProB 2.0</li>
-				</ul>
-				</p>
-				<p>
-					We have nightly builds for all versions. <br /> (<a
-						href="http://nightly.cobra.cs.uni-duesseldorf.de/">http://nightly.cobra.cs.uni-duesseldorf.de/</a>)
-				</p>
-			</section>
-
-
-
-			<section>
-				<h2>Vision</h2>
-				<div id="now" class="boxes now">
-					<ul>
-						<li>ProB classic</li>
-						<li>ProB for Rodin</li>
-						<li>probcli</li>
-						<li>ProB 2.0</li>
-					</ul>
-				</div>
-				<div id="soon" class="boxes soon">
-					<ul>
-						<li>ProB classic</li>
-						<li style="text-decoration: line-through;">ProB for Rodin</li>
-						<li>probcli</li>
-						<li>ProB 2.0</li>
-					</ul>
-
-				</div>
-				<div id="then" class="boxes then">
-					<ul>
-						<li style="text-decoration: line-through;">ProB classic</li>
-						<li style="text-decoration: line-through;">ProB for Rodin</li>
-						<li>probcli</li>
-						<li>ProB 2.0</li>
-				</ul>
-
-				</div>
-				<div class="rectangle"></div>
-				<div
-					style="width: 0; height: 0; border-left: 60px solid black; border-top: 20px solid transparent; border-bottom: 20px solid transparent; position: fixed; top: 325px; left: 770px;"></div>
-			<div class="now time">Now</div>
-			<div class="soon time">Soon</div>
-			<div class="then time">Then</div>
-			
-			</section>
-
-
-			<section>
-				<h2>Main Programmatic Abstractions</h2>
-				<ul>
-					<li>State Space</li>
-					<li>Model</li>
-					<li>Trace</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>State Space</h2>
-				<ul>
-					<li>Provide graph functions for interacting with the state
-						space</li>
-					<li>Handles the evaluation of formulas</li>
-					<li>Acts as an Animator to communicate with ProB through
-						commands</li>
-					<li>Caches the values of properties for given states</li>
-					<li>Notify changes in the state space</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Trace</h2>
-				<ul>
-					<li>Represents a path through the state space</li>
-					<li>Linked list with pointer to current state</li>
-					<li>Can move forward and backward through the Trace</li>
-					<li>Can add new transitions to the Trace</li>
-					<li>Can evaluate a formula for the current state or for every
-						state in the trace</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Model</h2>
-				<ul>
-					<li>Provides user with a graph representation of the machine
-						hierarchy</li>
-					<li>Nodes in the graph are programmatic abstractions of the
-						elements of the Model (i.e. Machines and Contexts)</li>
-					<li>Machines and Contexts contain abstraction of children
-						elements (i.e. variables, invariants, ...)</li>
-					<li>Contains link to original model file</li>
-					<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>,
-						<code>CSPModel</code></li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Relationship between programmatic abstractions</h2>
-				<p>Diagram?</p>
-			</section>
-
-			<section>
-				<h2>IEvalElement</h2>
-				<ul>
-					<li>Maps a String to a formalism to specify the correct parser</li>
-					<li>Is serializable</li>
-					<li>Convert in Groovy Console (DEMO?)</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Animation Selector</h2>
-				<ul>
-					<li>Maintains a list of Traces and a list of State Spaces</li>
-					<li>Maintains the current animation (a Trace) for ProB 2.0</li>
-					<li>Possible to change the current animation</li>
-					<li>Possible to remove an animation</li>
-					<li>Notifies interested listeners of changes in the animation</li>
-				</ul>
-			</section>
-
-			<section>
-				<h2>Listener framework</h2>
-				<p>Listeners can register themselves in the Animation Selector
-					to receive notifications if the model that is being animated
-					changes (and the state space for that model) or if a change in the
-					current animation takes place (and the Trace that represents the
-					new current animation)</p>
-				<br> <br>
-				<p>
-					Reference:
-					<code>IAnimationChangeListener</code>
-					,
-					<code>IModelChangedListener</code>
-				</p>
-			</section>
-
-			<section>
-				<h2>Listener framework (cont.)</h2>
-				<p>Listeners can register themselves in the state space to
-					receive notifications if any new states within the state space are
-					found (and the list of new operations that are received)</p>
-				<br> <br>
-				<p>
-					Reference:
-					<code>IStatesCalculatedListener</code>
-				</p>
-			</section>
-
-			<section>
-				<h2>Api</h2>
-				<p>Provides the Groovy interface through which the user can load
-					models and update the ProB binaries.</p>
-			</section>
+<div class="reveal">
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+		<h1>ProB 2.0 for Developers</h1>
+		</section>
+		<section>
+		<h2>Available ProB Versions</h2>
+		<p>
+			<ul>
+				<li>ProB Tcl/Tk (a.k.a. ProB classic)</li>
+				<li>ProB for Rodin</li>
+				<li>probcli</li>
+				<li>ProB 2.0</li>
+			</ul>
+		</p>
+		<p>
+			 We have nightly builds for all versions. <br/> (<a href="http://nightly.cobra.cs.uni-duesseldorf.de/">http://nightly.cobra.cs.uni-duesseldorf.de/</a>)
+		</p>
+		</section>
+		<section>
+		<h2>Vision</h2>
+		<div id="now" class="boxes now">
+			<ul>
+				<li>ProB classic</li>
+				<li>ProB for Rodin</li>
+				<li>probcli</li>
+				<li>ProB 2.0</li>
+			</ul>
 		</div>
+		<div id="soon" class="boxes soon">
+			<ul>
+				<li>ProB classic</li>
+				<li style="text-decoration: line-through;">ProB for Rodin</li>
+				<li>probcli</li>
+				<li>ProB 2.0</li>
+			</ul>
+		</div>
+		<div id="then" class="boxes then">
+			<ul>
+				<li><span style="text-decoration: line-through;">ProB classic</span><span style="">*</span></li>
+				<li style="text-decoration: line-through;">ProB for Rodin</li>
+				<li>probcli</li>
+				<li>ProB 2.0</li>
+			</ul>
+		</div>
+		<div class="rectangle">
+		</div>
+		<div style="width: 0; height: 0; border-left: 60px solid black; border-top: 20px solid transparent; border-bottom: 20px solid transparent; position: fixed; top: 325px; left: 770px;">
+		</div>
+		<div class="now time">
+			Now
+		</div>
+		<div class="soon time">
+			Soon
+		</div>
+		<div class="then time">
+			Then
+		</div>
+		<div class="" style="top: 395px; position: fixed; font-size: 0.5em;">
+			* We will support the Tcl/Tk version for some time
+		</div>
+		<br/>&nbsp; <br/>&nbsp; <br/>&nbsp; <br/>&nbsp; <br/>&nbsp; <br/>&nbsp; <br/>&nbsp; <br/>&nbsp; </section>
+		<section>
+		<h2>Status of ProB 2.0</h2>
+		<ul>
+			<li>ProB 2.0 is ready for exploration</li>
+			<li>Only very few things are missing compared to ProB 1.0</li>
+			<li>And it has many advantages</li>
+			<li>Developer API may change (I don't expect radical changes)</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Overview</h2>
+		<ul>
+			<li>Java API</li>
+			<ul>
+				<li>Model, StateSpace, Trace</li>
+				<li>Formula Evaluation</li>
+				<li>Notification Framework</li>
+				<li>Commands</li>
+			</ul>
+			<li>Scripting Interaction</li>
+			<ul>
+				<li>Console</li>
+				<li>UI Access</li>
+			</ul>
+			<li>Live Coding</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Model</h2>
+		<ul>
+			<li>Access to Model's static properties </li>
+		<ul>
+			<li>Contexts / Machines </li>
+			<li>Constants, Variables, Invariant, Events, ... </li>
+		</ul>
+			<li>A model is a graph of components and their relationship </li>
+			<li>Except for Graph handling no shared methods between Formalisms</li>
+			<li>Main difference between EventBModel and ClassicalBModel: The artifacts</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Model</h2>
+		<p>
+			Get the model for a state space: <code>m = s.getModel()</code>
+		</p>
+		<p>
+			Check its type: <code>m.getClass()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		<section>
+		<h2>Event B Model</h2>
+		<p>
+			Two types of artifacts
+		</p>
+		<ol>
+			<li>Machines</li>
+			<li>Contexts</li>
+		</ol>
+		<p>
+			Let's explore machines
+		</p>
+		</section>
+		
+		
+		<section>
+		<h2>Event B Machine</h2>
+		<p>
+			Machines allow access to
+		</p>
+		<ul>
+			<li>Variables</li>
+			<li>Invariant</li>
+			<li>Variant</li>
+			<li>Events
+		<ul>
+			<li>Parameters</li>
+			<li>Guards</li>
+			<li>Actions</li>
+			<li>Witnesses</li>
+		</ul></li>
+		</ul>
+		</section>
+		
+		<section>
+		<h2>Event B Machine</h2>
+		<p>
+			Get the machine from the model:
+		<code>mch = m.getComponent("Scheduler0")</code>
+		</p>
+		<p>
+			Get the Invariants:
+		<code>mch.getInvariants()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>Events</h2>
+		<p>
+			Get the events from the machine:
+		<code>mch.getEvents()</code>
+		</p>
+		<p>
+			Get the 'new' event from the machine:
+		<code>ne = mch.getEvents()[1]</code>
+		</p>
+		<p>
+			Get the guard of the 'new' event:
+		<code>ne.getGuards()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
 
+		<section>
+		<h2>Summary: Model</h2>
+		<p>
+			Using the model we have access to the components of an Event-B development as well as to the individual parts of a specific component.
+		</p>
+		</section>
+				
+		<section>
+		<h2>StateSpace</h2>
+		<ul>
+			<li>Represents the whole currently know world for an animation</li>
+			<li>Lazily explored</li>
+			<li>Notification mechanism</li>
+			<li>Contains a JUNG graph and delegating few (safe*) methods</li>
+		</ul>
+		<div class="" style="top: 395px; position: fixed; font-size: 0.5em;">
+			* those that do not remove something form the state space. 
+		</div>
+		</section>
+		
+		<section>
+		<h2>State space</h2>
+		<p>
+		 Get the state space from a model:<br />
+		<code>s = m.getStatespace()</code>
+		</p>
+		<p>
+		Are there some states where the invariant holds?:<br />
+		<code>s.getInvariantOk()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		<section>
+
+		<h2>State space</h2>
+		 <p>
+		Are there some states that violate the invariant?<br />
+		<code>s.getInvariantKo()</code>
+		</p>
+		 <p>
+		What kind of object is the result?<br />
+		<code>s.getInvariantKo().getClass()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>State Space</h2>
+		 <p>
+		What is contained in that set?<br />
+		<code>s.getInvariantKo().first().getClass()</code>
+		</p>
+		 <p>
+Let's explore StateIds<br />
+		<code>x = s.getInvariantKo().first()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>StateId</h2>
+		 <p>
+		Can we get the value of a variable in that state?<br />
+		<code>x.value("active")</code>
+		</p>
+		 <p>Can we randomly "execute" events? 
+         <br />
+		<code>y = x.anyEvent()</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>StateId</h2>
+		 <p>
+		Can we "execute" a specific event?<br />
+		<code>???</code>
+		</p>
+		 <p>How do we find out which events are enabled? 
+         <br />
+		<code>s.getOutEdges(x)</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>StateId</h2>
+		 <p>
+		What are the elements of the hashmap?<br />
+		<code>s.getOutEdges(x).first().getClass()</code>
+		</p>
+		 <p>Now let's get one of these OpInfo objects
+         <br />
+		<code>o = (s.getOutEdges(x) as List)[1]</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>OpInfo</h2>
+		 <p>
+		What are the name and parameters of the operation?<br />
+		<code>o.getName(); o.getParams()</code>
+		</p>What is the formal parameter name?
+		 <p>
+		<code></code>
+         <br />
+		<code>o = (s.getOutEdges(x) as List)[1]</code>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		
+		<section>
+		
+		<h2>Trace</h2>
+		<ul>
+			<li>Represents a path through the state space</li>
+			<li>Linked list with pointer to current state</li>
+			<li>Can move forward and backward through the Trace</li>
+			<li>Can add new transitions to the Trace</li>
+			<li>Can evaluate a formula for the current state or for every state in the trace</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Model</h2>
+		<ul>
+			<li>Provides user with a graph representation of the machine hierarchy</li>
+			<li>Nodes in the graph are programmatic abstractions of the elements of the Model (i.e. Machines and Contexts)</li>
+			<li>Machines and Contexts contain abstraction of children elements (i.e. variables, invariants, ...)</li>
+			<li>Contains link to original model file</li>
+			<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>, <code>CSPModel</code></li>
+		</ul>
+		</section>
+		<section>
+		<h2>Relationship between programmatic abstractions</h2>
+		<p>
+			Diagram?
+		</p>
+		</section>
+		<section>
+		<h2>IEvalElement</h2>
+		<ul>
+			<li>Maps a String to a formalism to specify the correct parser</li>
+			<li>Is serializable</li>
+			<li>Convert in Groovy Console (DEMO?)</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Animation Selector</h2>
+		<ul>
+			<li>Maintains a list of Traces and a list of State Spaces</li>
+			<li>Maintains the current animation (a Trace) for ProB 2.0</li>
+			<li>Possible to change the current animation</li>
+			<li>Possible to remove an animation</li>
+			<li>Notifies interested listeners of changes in the animation</li>
+		</ul>
+		</section>
+		<section>
+		<h2>Listener framework</h2>
+		<p>
+			Listeners can register themselves in the Animation Selector to receive notifications if the model that is being animated changes (and the state space for that model) or if a change in the current animation takes place (and the Trace that represents the new current animation)
+		</p>
+		<br>
+		<br>
+		<p>
+			 Reference: <code>IAnimationChangeListener</code>
+			, <code>IModelChangedListener</code>
+		</p>
+		</section>
+		<section>
+		<h2>Listener framework (cont.)</h2>
+		<p>
+			Listeners can register themselves in the state space to receive notifications if any new states within the state space are found (and the list of new operations that are received)
+		</p>
+		<br>
+		<br>
+		<p>
+			 Reference: <code>IStatesCalculatedListener</code>
+		</p>
+		</section>
+		<section>
+		<h2>Api</h2>
+		<p>
+			Provides the Groovy interface through which the user can load models and update the ProB binaries.
+		</p>
+		</section>
 	</div>
-
-	<script src="lib/js/head.min.js"></script>
-	<script src="js/reveal.min.js"></script>
-
-	<script>
+</div>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+<script>
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
@@ -226,10 +411,8 @@
             progress : true,
             history : true,
             center : true,
-
             theme : Reveal.getQueryHash().theme, // available themes are in /css/theme
             transition : Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-
             // Optional libraries used to extend on reveal.js
             dependencies : [ {
                 src : 'lib/js/classList.js',
@@ -270,6 +453,5 @@
             ]
         });
     </script>
-
 </body>
 </html>
