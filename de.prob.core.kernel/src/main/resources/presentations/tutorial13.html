@@ -13,7 +13,6 @@
 <link rel="icon" type="image/png" href="../images/favicon.ico">
 <!-- For syntax highlighting -->
 <link rel="stylesheet" href="lib/css/zenburn.css">
-<link rel="stylesheet" href="tutorial13.css">
 <!-- If the query includes 'print-pdf', use the PDF print sheet -->
 <script>
     document.write('<link rel="stylesheet" href="css/print/'
@@ -23,6 +22,7 @@
 <!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+<link rel="stylesheet" href="tutorial13.css">
 </head>
 <body>
 <div class="reveal">
@@ -112,7 +112,6 @@
 				<li>Console</li>
 				<li>UI Access</li>
 			</ul>
-			<li>Live Coding</li>
 		</ul>
 		</section>
 		<section>
@@ -130,11 +129,13 @@
 		</section>
 		<section>
 		<h2>Model</h2>
-		<p>
-			Get the model for a state space: <code>m = s.getModel()</code>
+		<p class="question">
+			How can we get the model for a given state space? 
+<pre><code>m = s.getModel()</code></pre>
 		</p>
-		<p>
-			Check its type: <code>m.getClass()</code>
+		<p class="question">
+			What is the Java type of m? 
+<pre><code>m.getClass()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -175,13 +176,13 @@
 		
 		<section>
 		<h2>Event B Machine</h2>
-		<p>
-			Get the machine from the model:
-		<code>mch = m.getComponent("Scheduler0")</code>
+		<p class="question">
+How do we get access to the Scheduler0 machine?
+<pre><code>mch = m.getComponent("Scheduler0")</code></pre>
 		</p>
-		<p>
-			Get the Invariants:
-		<code>mch.getInvariants()</code>
+		<p class="question">
+What are the invariants of Scheduler0?
+		<pre><code>mch.getInvariants()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -189,17 +190,17 @@
 		
 		<section>
 		<h2>Events</h2>
-		<p>
-			Get the events from the machine:
-		<code>mch.getEvents()</code>
+		<p class="question">
+			What are the events of Scheduler0?
+		<pre><code>mch.getEvents()</code></pre>
 		</p>
-		<p>
-			Get the 'new' event from the machine:
-		<code>ne = mch.getEvents()[1]</code>
+		<p class="question">
+			How can we access the event named new?
+		<pre><code>ne = mch.getEvent("new")</code></pre>
 		</p>
-		<p>
-			Get the guard of the 'new' event:
-		<code>ne.getGuards()</code>
+		<p class="question">
+What is the guard of new?
+		<pre><code>ne.getGuards()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -207,7 +208,7 @@
 
 		<section>
 		<h2>Summary: Model</h2>
-		<p>
+		<p style="text-align: left">
 			Using the model we have access to the components of an Event-B development as well as to the individual parts of a specific component.
 		</p>
 		</section>
@@ -227,13 +228,13 @@
 		
 		<section>
 		<h2>State space</h2>
-		<p>
-		 Get the state space from a model:<br />
-		<code>s = m.getStatespace()</code>
+		<p class="question">
+		 How do we retrieve the state space for a given model?<br />
+		<pre><code>s = m.getStatespace()</code></pre>
 		</p>
-		<p>
-		Are there some states where the invariant holds?:<br />
-		<code>s.getInvariantOk()</code>
+		<p class="question">
+		Are there some states where the invariant holds?<br />
+		<pre><code>s.getInvariantOk()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -241,13 +242,13 @@
 		<section>
 
 		<h2>State space</h2>
-		 <p>
+		 <p class="question">
 		Are there some states that violate the invariant?<br />
-		<code>s.getInvariantKo()</code>
+		<pre><code>s.getInvariantKo()</code></pre>
 		</p>
-		 <p>
+		 <p class="question">
 		What kind of object is the result?<br />
-		<code>s.getInvariantKo().getClass()</code>
+		<pre><code>s.getInvariantKo().getClass()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -255,13 +256,13 @@
 		
 		<section>
 		<h2>State Space</h2>
-		 <p>
+		 <p class="question">
 		What is contained in that set?<br />
-		<code>s.getInvariantKo().first().getClass()</code>
+		<pre><code>s.getInvariantKo().first().getClass()</code></pre>
 		</p>
-		 <p>
+		 <p class="question">
 Let's explore StateIds<br />
-		<code>x = s.getInvariantKo().first()</code>
+		<pre><code>x = s.getInvariantKo().first()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -269,13 +270,13 @@ Let's explore StateIds<br />
 		
 		<section>
 		<h2>StateId</h2>
-		 <p>
+		 <p class="question">
 		Can we get the value of a variable in that state?<br />
-		<code>x.value("active")</code>
+		<pre><code>x.value("active")</code></pre>
 		</p>
-		 <p>Can we randomly "execute" events? 
+		 <p class="question">Can we randomly "execute" events? 
          <br />
-		<code>y = x.anyEvent()</code>
+		<pre><code>y = x.anyEvent()</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -283,13 +284,13 @@ Let's explore StateIds<br />
 		
 		<section>
 		<h2>StateId</h2>
-		 <p>
+		 <p class="question">
 		Can we "execute" a specific event?<br />
-		<code>???</code>
+		<pre><code>// Yes we can! </code></pre>
 		</p>
-		 <p>How do we find out which events are enabled? 
+		 <p class="question">How do we find out which events are enabled? 
          <br />
-		<code>s.getOutEdges(x)</code>
+		<pre><code>s.getOutEdges(x)</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -297,13 +298,13 @@ Let's explore StateIds<br />
 		
 		<section>
 		<h2>StateId</h2>
-		 <p>
+		 <p class="question">
 		What are the elements of the hashmap?<br />
-		<code>s.getOutEdges(x).first().getClass()</code>
+		<pre><code>s.getOutEdges(x).first().getClass()</code></pre>
 		</p>
-		 <p>Now let's get one of these OpInfo objects
+		 <p class="question">Now let's get one of these OpInfo objects
          <br />
-		<code>o = (s.getOutEdges(x) as List)[1]</code>
+		<pre><code>o = (s.getOutEdges(x) as List)[1]</code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
@@ -311,55 +312,281 @@ Let's explore StateIds<br />
 		
 		<section>
 		<h2>OpInfo</h2>
-		 <p>
-		What are the name and parameters of the operation?<br />
-		<code>o.getName(); o.getParams()</code>
-		</p>What is the formal parameter name?
-		 <p>
-		<code></code>
-         <br />
-		<code>o = (s.getOutEdges(x) as List)[1]</code>
+		 <p  class="question">
+		What is the name of the operation?<br />
+		<pre><code>n = o.getName()</code></pre>
+		</p>
+		 <p  class="question">
+		What are the actual parameters?<br />
+		<pre><code>n = o.getParams()</code></pre>
+		</p>
+		 <p class="question">What is the formal parameter name?<br />
+		<pre><code>e = mch.getEvent(o.getName())</code></pre>
+		</p>
+		 <p class="question">Finally we can "execute" the Event using the perform method.
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
 		</section>
 		
+		<section>
+		<h2>Complicated?</h2>
+		 <p style="text-align: left">
+		 We try not to intertwine different aspects of the system.<br> <br> 
+		 That is why we had to get the formal parameter from the model's representation, 
+		 the enabled operations from the state space, 
+		 and the detail information from the OpInfo object.  
+		</p>
+		 <p style="text-align: left" >
+		This design principle was taken from Rich Hickey's <a href="http://www.infoq.com/presentations/Simple-Made-Easy">"Simple made easy"</a> talk. 
+		</p>
+		 <p style="text-align: left">
+		Doesn't prevent us (or you!) from adding convenience functions!  
+		</p>
+		</section>
 		
 		<section>
+		<h2>Convenience function</h2>
+  	    <pre><code> 
+def exec(mch,x,name,params) {
+   formal_params = mch.getEvent(name).getParameters()
+   pred = [formal_params,params].transpose()
+             .collect { a,b -> a.toString() + "=" + b.toString() }
+   x.perform(name,pred)
+}  
+</code></pre>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+
+		</section>
+								
+				
+		<section>
+		<h2>Convenience functions</h2>
+		<p style="text-align: left">
+			You can write your own set of convenience functions in a groovy file and run it at the beginning.
+  	    <pre><code>run ~/myAwesomeScript.groovy</code></pre>			
+		</p>
+		</section>
+
+		<section>
+		<h2>Summary: StateSpace</h2>
+		<p style="text-align: left">
+			Using the state space we have access to the model's behavior. We can explore the possible states of the system.
+		</p>
+		</section>
+
+		<section>
+		<h2>Traces</h2>
+		 <p  class="question">
+		How can we track a trace of events?<br />
+		<pre><code>t = new Trace(s)</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
 		
+		<section>
 		<h2>Trace</h2>
 		<ul>
 			<li>Represents a path through the state space</li>
 			<li>Linked list with pointer to current state</li>
 			<li>Can move forward and backward through the Trace</li>
 			<li>Can add new transitions to the Trace</li>
-			<li>Can evaluate a formula for the current state or for every state in the trace</li>
 		</ul>
 		</section>
+
 		<section>
-		<h2>Model</h2>
-		<ul>
-			<li>Provides user with a graph representation of the machine hierarchy</li>
-			<li>Nodes in the graph are programmatic abstractions of the elements of the Model (i.e. Machines and Contexts)</li>
-			<li>Machines and Contexts contain abstraction of children elements (i.e. variables, invariants, ...)</li>
-			<li>Contains link to original model file</li>
-			<li>Current Implementations: <code>ClassicalBModel</code>, <code>EventBModel</code>, <code>CSPModel</code></li>
-		</ul>
-		</section>
-		<section>
-		<h2>Relationship between programmatic abstractions</h2>
-		<p>
-			Diagram?
+		<h2>Traces</h2>
+		 <p  class="question">
+		What is the current state of the trace?<br />
+		<pre><code>t.getCurrentState()</code></pre>
 		</p>
+		 <p class="question">What are the enabled events in the current state?<br />
+		<pre><code>t.getNextTransitions()</code></pre>
+		</p>
+		 <p class="question">How can we "execute" an event?<br />
+		<pre><code>t = t.add(t.getNextTransitions().first().getId())</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
 		</section>
+		
+		
+
+
 		<section>
-		<h2>IEvalElement</h2>
+		<h2>Traces</h2>
+		 <p  class="question">
+		How can we produce a random trace?<br />
+		<pre><code>def randTrace(t,n) { 
+   nt = t; 
+   for(int i=0; i < n; i++) {
+      nt = nt.anyEvent(); 
+   }
+   nt
+} </code></pre>
+		</p>
+		 <p  class="question">
+		Let's run it!<br />
+		<pre><code>randTrace(t,20)</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+
+
+		<section>
+		<h2>Traces</h2>
+		 <p  class="question">
+		How can go back in time?<br />
+		<pre><code>t = t.back()</code></pre>
+		</p>
+		 <p  class="question">
+		How can we go forward in time?<br />
+		<pre><code>t = t.forward()</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+
+		<section>
+		<h2>Trace</h2>
 		<ul>
-			<li>Maps a String to a formalism to specify the correct parser</li>
-			<li>Is serializable</li>
-			<li>Convert in Groovy Console (DEMO?)</li>
+			<li>If we go back in time, the trace keeps future states</li>
+			<li>If we change a decision in the past, the trace drops the future</li>
+			<li>It behaves in the same way your browser history does</li>
 		</ul>
 		</section>
+	
+	
+	  <section>
+		<h2>Evaluation</h2>
+		<ul>
+			<li>Is done by passing an IEvalElement to an evaluator</li>
+			<li>Each formalism has its own descendant of IEvalElement</li>
+			<li>IEvalElements apply a parser to a String</li>
+		</ul>
+		</section>
+		
+		<section>
+		<h2>Evaluation</h2>
+		 <p  class="question">
+		How can we create an EventB formula?<br />
+		<pre><code>f1 = "active \\/ waiting" as EventB</code></pre>
+		</p>
+		 <p  class="question">
+		And how do we create a classical B formula?<br />
+		<pre><code>f2 = "active \\/ waiting" as ClassicalB</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		<section>
+		<h2>Evaluation</h2>
+		 <p  class="question">
+		How can we evaluate the formulas for state x?<br />
+		<pre><code>x.eval(f1)</code></pre>
+		</p>
+		 <p  class="question">
+		What have we got?<br />
+		<pre><code>x.eval(f1).getClass()</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		<section>
+		
+		<h2>EvaluationResult</h2>
+		 <p  class="question">
+		What is the result of evaluating "a = 5 & b = a + 1"?<br />
+		<pre><code>f3="a = 5 & b = a + 1" as ClassicalB
+rr = x.eval(f3)</code></pre>
+		</p>
+		 <p  class="question">
+		What if I am only interested if there is a solution?<br />
+		<pre><code>rr.getValue()</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		<section>
+		
+		<h2>EvaluationResult</h2>
+		 <p  class="question">
+		Can I get the solution please?<br />
+		<pre><code>rr.solution</code></pre>
+		</p>
+		 <p  class="question">
+		How about a map from variables to values?<br />
+		<pre><code>// Sorry not yet implemented :(</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+	  <section>
+		<h2>Evaluation</h2>
+		<ul>
+			<li>ProB's Prolog engine does not make a difference between EventB and classical B</li>
+			<li>The parsers are different!</li>
+		<ul>
+			<li>Event B Formulas are parsed by Rodin </li>
+			<li>Classical B formulas are parsed by ProB's parser</li>
+		</ul>
+		</ul>
+		</section>
+
+		<section>
+		<h2>Evaluation</h2>
+		 <p  class="question">
+		Ok, we can evaluate a formula for a state. Anything else that evaluates formulas?<br />
+		<pre><code>t.eval(f1)</code></pre>
+		</p>
+		 <p  class="question">
+		Anything else?<br />
+		<pre><code>s.evaluateForEveryState([f1, "waiting" as EventB])</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+
+		<section>
+		<h2>Evaluation</h2>
+		 <p  class="question">
+		Can we evaluate the guard of an event for a whole trace?<br />
+		<pre><code>g = mch.getEvent("del").getGuards()
+g = g.collect {it.toString()}.join(" & ")
+t.eval(g)</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+
+
+		<section>
+		<h2>Syntactic sugar</h2>
+		 <p  class="question">
+		I want to have it extra sweet!<br />
+		<pre><code>String.metaClass.and = { b-> delegate + " & "+b}
+not = { "not("+it+")" }
+conj = { it.collect{it.toString()}.inject {a,b -> a & b}} </code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		  <section>
+		<h2>Summary: Evaluation</h2>
+		<p style="text-align:left">Any executor (Trace, StateSpace, StateId) accepts IEvalElements and 
+		returns a result that is specific for the executor.</p>
+		</section>
+		
+		
+		
+		
+		
 		<section>
 		<h2>Animation Selector</h2>
 		<ul>

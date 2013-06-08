@@ -32,3 +32,9 @@
 .reveal iframe {
    margin-top: 40px;
 }
+
+.reveal .question {
+  text-align: left;
+  font-size: 0.8em;
+  line-height: 1.0em;
+}
