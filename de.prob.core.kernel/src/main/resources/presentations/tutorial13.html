@@ -29,7 +29,7 @@
 	<!-- Any section element inside of this container is displayed as a slide -->
 	<div class="slides">
 		<section>
-		<h1>ProB 2.0 for Developers</h1>
+		<h1>ProB 2.0 Tutorial</h1>
 		</section>
 		<section>
 		<h2>Available ProB Versions</h2>
@@ -100,6 +100,7 @@
 		<section>
 		<h2>Overview</h2>
 		<ul>
+		    <li>ProB 2.0 Demo</li>
 			<li>Java API</li>
 			<ul>
 				<li>Model, StateSpace, Trace</li>
@@ -114,6 +115,20 @@
 			</ul>
 		</ul>
 		</section>
+		
+		
+		<section>
+		<h2>ProB 2.0 Demo</h2>
+		<ul>
+			<li>Animation</li>
+			<li>Model Checking</li>
+			<li>CBC Checking</li>
+			<li>Visualizations</li>
+		</ul>
+		</section>
+		
+		
+		
 		<section>
 		<h2>Model</h2>
 		<ul>
@@ -496,35 +511,7 @@ def exec(mch,x,name,params) {
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
 		</section>
-		<section>
 		
-		<h2>EvaluationResult</h2>
-		 <p  class="question">
-		What is the result of evaluating "a = 5 & b = a + 1"?<br />
-		<pre><code>f3="a = 5 & b = a + 1" as ClassicalB
-rr = x.eval(f3)</code></pre>
-		</p>
-		 <p  class="question">
-		What if I am only interested if there is a solution?<br />
-		<pre><code>rr.getValue()</code></pre>
-		</p>
-		<iframe src="../console2.html" scrolling="no" width="800" height="200">
-		</iframe>
-		</section>
-		<section>
-		
-		<h2>EvaluationResult</h2>
-		 <p  class="question">
-		Can I get the solution please?<br />
-		<pre><code>rr.solution</code></pre>
-		</p>
-		 <p  class="question">
-		How about a map from variables to values?<br />
-		<pre><code>// Sorry not yet implemented :(</code></pre>
-		</p>
-		<iframe src="../console2.html" scrolling="no" width="800" height="200">
-		</iframe>
-		</section>
 		
 	  <section>
 		<h2>Evaluation</h2>
@@ -569,19 +556,92 @@ t.eval(g)</code></pre>
 		<h2>Syntactic sugar</h2>
 		 <p  class="question">
 		I want to have it extra sweet!<br />
-		<pre><code>String.metaClass.and = { b-> delegate + " & "+b}
+		<pre><code>String.metaClass.and = {b -> "("+delegate+") & ("+b + ")" }
 not = { "not("+it+")" }
+String.metaClass.implies = {b -> "("+delegate +") => (" + b + ") "}
 conj = { it.collect{it.toString()}.inject {a,b -> a & b}} </code></pre>
 		</p>
 		<iframe src="../console2.html" scrolling="no" width="800" height="200">
 		</iframe>
 		</section>
+
+		<section>
+		<h2>Constraint based solver</h2>
+		 <p  class="question">
+		Evaluation is fine, but can I use ProB's solver?<br />
+		<pre><code>f4 = new EventB("a = 1 & b = a - 1")
+c4 = new CbcSolveCommand(f4)
+s.execute(c4)
+c4.getResult()
+</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		<p>Why do we need a state space?</p>
+		</section>
 		
-		  <section>
+		<section>
+		<h2>Constraint based solver</h2>
+		 <p  class="question">
+		What do we get if the predicate is not solvable?<br />
+		<pre><code>f4 = new ClassicalB("a = a - 1")
+c4 = new CbcSolveCommand(f4)
+s.execute(c4)
+c4.getResult()
+</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+
+		
+		
+<section>
+		<h2>Syntactic sugar</h2>
+		 <p  class="question">
+		Can we get rid of that Java stuff please?<br />
+		<pre><code>def cbc_solve(space, formula) {
+   e = new EventB(formula)
+   c = new CbcSolveCommand(e)
+   space.execute(c)
+   c.getResult()
+}
+</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+
+<section>
+		<h2>Sweet CBC</h2>
+		 <p  class="question">
+		Can we find out if one event can in principle be enabled?<br />
+		<pre><code>i = conj(mch.getInvariants())
+g = conj(mch.getEvent("del").getGuards())
+cbc_solve(s, i & i.implies(g))
+</code></pre>
+		</p>
+		<iframe src="../console2.html" scrolling="no" width="800" height="200">
+		</iframe>
+		</section>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+				  <section>
 		<h2>Summary: Evaluation</h2>
 		<p style="text-align:left">Any executor (Trace, StateSpace, StateId) accepts IEvalElements and 
 		returns a result that is specific for the executor.</p>
 		</section>
+		
+		
 		
 		
 		<section>
